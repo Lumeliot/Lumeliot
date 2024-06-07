@@ -22,3 +22,18 @@ function loadCharacter() {
   }
 }
 
+function sauvegarderFeuilleDePersonnage(nom, points) {
+  // Créer une référence à l'emplacement dans la base de données où vous voulez sauvegarder les données
+  const ref = firebase.database().ref('feuilles-de-personnage/' + nom);
+
+  // Enregistrer les données dans la base de données
+  ref.set({
+    nom: nom,
+    points: points
+  }).then(() => {
+    console.log('Données sauvegardées avec succès');
+  }).catch((error) => {
+    console.error('Erreur lors de la sauvegarde des données : ', error);
+  });
+}
+
