@@ -1,19 +1,23 @@
+function saveCharacter() {
+  const character = {
+    name: document.getElementById('name').value,
+    race: document.getElementById('race').value,
+    class: document.getElementById('class').value,
+    background: document.getElementById('background').value
+  };
 
-
-function sauvegarderFeuilleDePersonnage(nom, points) {
-  // Créer une référence à l'emplacement dans la base de données où vous voulez sauvegarder les données
-  const ref = firebase.database().ref('feuilles-de-personnage/' + nom);
-
-  // Enregistrer les données dans la base de données
-  ref.set({
-    nom: nom,
-    points: points
-  }).then(() => {
-    console.log('Données sauvegardées avec succès');
-  }).catch((error) => {
-    console.error('Erreur lors de la sauvegarde des données : ', error);
-  });
+  // Utiliser Firebase pour sauvegarder les données
+  const dbRef = firebase.database().ref('feuilles-de-personnage');
+  dbRef.push(character)
+    .then(() => {
+      alert('Personnage sauvegardé avec succès!');
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la sauvegarde du personnage : ', error);
+      alert('Erreur lors de la sauvegarde du personnage. Veuillez réessayer.');
+    });
 }
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
